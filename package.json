@@ -1,0 +1,130 @@
+{
+  "name": "carbon-coder",
+  "displayName": "Carbon Coder",
+  "description": "Analyze, budget, and refactor your code's carbon footprint at fleet scale with intelligent, variable-aware quick fixes.",
+  "version": "0.0.1",
+  "publisher": "RonavPoonekar",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://github.com/rpoonekar/carbon-coder#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rpoonekar/carbon-coder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rpoonekar/carbon-coder/issues"
+  },
+  "files": [
+    "out/**/*",
+    "media/**/*",
+    "node_modules/**/*",
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "icon.png"
+  ],
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "green-software",
+    "carbon",
+    "sustainability",
+    "energy",
+    "cloud",
+    "efficiency"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onLanguage:python",
+    "onCommand:carbonCoder.refreshAnalysis",
+    "onView:carbonCoder.impactDashboard"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "carbonCoder.refreshAnalysis",
+        "title": "Carbon Coder: Refresh Carbon Analysis"
+      },
+      {
+        "command": "carbonCoder.showOptimizations",
+        "title": "Carbon Coder: Show Green Optimizations"
+      },
+      {
+        "command": "carbonCoder.openImpactDashboard",
+        "title": "Carbon Coder: Open Impact Dashboard"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "carbonCoder",
+          "title": "Carbon Economy",
+          "icon": "media/hot-low.svg"
+        }
+      ]
+    },
+    "views": {
+      "carbonCoder": [
+        {
+          "type": "webview",
+          "id": "carbonCoder.impactDashboard",
+          "name": "Impact Dashboard"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Carbon Coder",
+      "properties": {
+        "carbonCoder.region": {
+          "type": "string",
+          "default": "US-CAL-CISO",
+          "description": "Grid region used for carbon intensity estimates."
+        },
+        "carbonCoder.scaleMultiplier": {
+          "type": "number",
+          "default": 1000,
+          "minimum": 1,
+          "description": "How many servers, workers, or active clients to model when calculating project carbon impact."
+        },
+        "carbonCoder.carbonBudget": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "description": "Carbon budget in gCO2e for the current project view."
+        },
+        "carbonCoder.enableEducationalHovers": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show educational hover cards for each energy hotspot."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "dependencies": {
+    "@vscode/codicons": "^0.0.45",
+    "@vscode/webview-ui-toolkit": "^1.4.0",
+    "espree": "^10.0.1"
+  },
+  "devDependencies": {
+    "@types/espree": "^10.1.0",
+    "@types/node": "^20.12.7",
+    "@types/vscode": "^1.86.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.4.5"
+  }
+}
