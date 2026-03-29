@@ -2,7 +2,7 @@
   "name": "carbon-coder-vscode",
   "displayName": "Carbon Coder for VS Code",
   "description": "Analyze, budget, and refactor your code's carbon footprint at fleet scale with intelligent, variable-aware quick fixes.",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "publisher": "RonavPoonekar",
   "license": "MIT",
   "icon": "icon.png",
@@ -69,7 +69,7 @@
         {
           "id": "carbonCoder",
           "title": "Carbon Economy",
-          "icon": "media/hot-low.svg"
+          "icon": "media/activitybar-carbon-coder.svg"
         }
       ]
     },
@@ -118,13 +118,13 @@
   "dependencies": {
     "@vscode/codicons": "^0.0.45",
     "@vscode/webview-ui-toolkit": "^1.4.0",
-    "espree": "^10.0.1"
+    "espree": "^10.0.1",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@types/espree": "^10.1.0",
     "@types/node": "^20.12.7",
     "@types/vscode": "^1.86.0",
-    "@vscode/vsce": "^3.7.1",
-    "typescript": "^5.4.5"
+    "@vscode/vsce": "^3.7.1"
   }
 }

@@ -1,6 +1,6 @@
 import time
 import requests
-import pandas as pd
+import polars as pd
 import tensorflow as tf
 
 

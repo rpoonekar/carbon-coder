@@ -267,10 +267,7 @@ class ImpactDashboardProvider implements vscode.WebviewViewProvider {
     this.view = webviewView;
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [
-        vscode.Uri.joinPath(this.extensionUri, 'node_modules', '@vscode', 'webview-ui-toolkit', 'dist'),
-        vscode.Uri.joinPath(this.extensionUri, 'node_modules', '@vscode', 'codicons', 'dist')
-      ]
+      localResourceRoots: [vscode.Uri.joinPath(this.extensionUri, 'node_modules', '@vscode', 'codicons', 'dist')]
     };
 
     webviewView.webview.onDidReceiveMessage(async (message) => {
@@ -514,9 +511,6 @@ function getDashboardHtml(webview: vscode.Webview, extensionUri: vscode.Uri, sta
       : state.analyzedFiles > 0
         ? '<li class="success-list-item">🌿 All clear! This file is highly optimized.</li>'
         : '<li>No analyzed hotspots yet. Open and save a supported file to populate the dashboard.</li>';
-  const toolkitUri = webview.asWebviewUri(
-    vscode.Uri.joinPath(extensionUri, 'node_modules', '@vscode', 'webview-ui-toolkit', 'dist', 'toolkit.js')
-  );
   const codiconUri = webview.asWebviewUri(
     vscode.Uri.joinPath(extensionUri, 'node_modules', '@vscode', 'codicons', 'dist', 'codicon.css')
   );
@@ -570,7 +564,6 @@ function getDashboardHtml(webview: vscode.Webview, extensionUri: vscode.Uri, sta
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="${codiconUri}" rel="stylesheet" />
-    <script type="module" src="${toolkitUri}"></script>
     <style>
       body { font-family: var(--vscode-font-family); padding: 16px; color: var(--vscode-foreground); background: var(--vscode-sideBar-background); }
       .hero { padding: 16px; border-radius: 14px; ${headerStyle} transition: border-color 140ms ease-out, background 140ms ease-out; }
@@ -615,7 +608,35 @@ function getDashboardHtml(webview: vscode.Webview, extensionUri: vscode.Uri, sta
       .popover.visible { display: block; }
       .popover-title { font-weight: 700; margin-bottom: 6px; }
       .popover-body { font-size: 12px; line-height: 1.45; opacity: 0.9; }
-      vscode-text-field, vscode-dropdown { width: 100%; }
+      .text-input, .select-input {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 30px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--vscode-input-border, transparent);
+        background: var(--vscode-input-background);
+        color: var(--vscode-input-foreground);
+        outline: none;
+      }
+      .text-input:focus, .select-input:focus {
+        border-color: var(--vscode-focusBorder);
+      }
+      .action-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30px;
+        padding: 0 12px;
+        border-radius: 6px;
+        border: 1px solid var(--vscode-button-secondaryBorder, transparent);
+        background: var(--vscode-button-secondaryBackground, var(--vscode-button-background));
+        color: var(--vscode-button-secondaryForeground, var(--vscode-button-foreground));
+        cursor: pointer;
+      }
+      .action-button:hover {
+        background: var(--vscode-button-secondaryHoverBackground, var(--vscode-button-hoverBackground));
+      }
     </style>
   </head>
   <body>
@@ -631,27 +652,27 @@ function getDashboardHtml(webview: vscode.Webview, extensionUri: vscode.Uri, sta
       <div class="value">${state.scaleMultiplier.toLocaleString()} nodes</div>
       <div class="controls">
         <input id="scale" type="range" min="1" max="10000" step="1" value="${state.scaleMultiplier}" />
-        <vscode-text-field id="scaleInput" value="${state.scaleMultiplier}"></vscode-text-field>
+        <input id="scaleInput" class="text-input" type="number" min="1" max="10000" step="1" value="${state.scaleMultiplier}" />
       </div>
       <div class="label-row" style="margin-top:14px;">
         <div class="label">Grid Context</div>
         <span class="codicon codicon-info info-button" data-topic="context" title="Learn more"></span>
       </div>
-      <vscode-dropdown id="gridContext">
-        <vscode-option value="development"${state.gridContext === 'development' ? ' selected' : ''}>Development</vscode-option>
-        <vscode-option value="production"${state.gridContext === 'production' ? ' selected' : ''}>Production</vscode-option>
-        <vscode-option value="green-cloud"${state.gridContext === 'green-cloud' ? ' selected' : ''}>Green Cloud</vscode-option>
-      </vscode-dropdown>
+      <select id="gridContext" class="select-input">
+        <option value="development"${state.gridContext === 'development' ? ' selected' : ''}>Development</option>
+        <option value="production"${state.gridContext === 'production' ? ' selected' : ''}>Production</option>
+        <option value="green-cloud"${state.gridContext === 'green-cloud' ? ' selected' : ''}>Green Cloud</option>
+      </select>
       <div class="label-row" style="margin-top:14px;">
         <div class="label">Carbon Budget</div>
         <span class="codicon codicon-info info-button" data-topic="budget" title="Learn more"></span>
       </div>
-      <vscode-text-field id="budget" value="${state.carbonBudget}"></vscode-text-field>
+      <input id="budget" class="text-input" type="number" min="0" step="1" value="${state.carbonBudget}" />
       <div class="budget-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${state.carbonBudget}" aria-valuenow="${state.totalCarbon}">
         <div class="budget-fill"></div>
       </div>
       <div class="hero-actions">
-        <vscode-button id="copyReport" appearance="secondary">Copy Impact Report</vscode-button>
+        <button id="copyReport" class="action-button" type="button">Copy Impact Report</button>
         <div id="copyStatus" class="copy-status"></div>
       </div>
     </div>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path
+    d="M7.1 7.4L3.9 12L7.1 16.6"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M16.9 7.4L20.1 12L16.9 16.6"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M12.1 5.6C9.35 7.15 8 9.2 8 11.65C8 15 10.35 18.15 14 18.4C15.55 16.6 16.35 14.75 16.35 12.85C16.35 9.65 14.95 7.35 12.1 5.6Z"
+    fill="currentColor"
+  />
+  <path
+    d="M10.4 13.2C11.55 12.9 12.95 12.05 14.05 10.55"
+    stroke="var(--vscode-sideBar-background, transparent)"
+    stroke-width="1.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
