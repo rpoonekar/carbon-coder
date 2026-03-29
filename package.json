@@ -2,7 +2,7 @@
   "name": "carbon-coder-vscode",
   "displayName": "Carbon Coder for VS Code",
   "description": "Analyze, budget, and refactor your code's carbon footprint at fleet scale with intelligent, variable-aware quick fixes.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "RonavPoonekar",
   "license": "MIT",
   "icon": "icon.png",
